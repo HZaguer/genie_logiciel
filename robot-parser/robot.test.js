@@ -22,3 +22,12 @@ test("0XABC code generates 'stop' command", function () {
   assert.equal(commands.length, 1);
   assert.equal(commands[0].name, "stop");
 });
+
+test("multiple codes generate command list", function () {
+  const commands = parseRobotCommand("0X123,0X123,0XABC");
+
+  assert.equal(commands.length, 3);
+  assert.equal(commands[0].name, "moveForward");
+  assert.equal(commands[1].name, "moveForward");
+  assert.equal(commands[2].name, "stop");
+});

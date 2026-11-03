@@ -1,9 +1,10 @@
+const COMMAND = {
+  "0X123": "moveForward",
+  "0X789": "moveBackward",
+  "0XABC": "stop",
+};
+
 export function parseRobotCommand(commandFlow) {
-  if (commandFlow === "0X789") {
-    return [{ name: "moveBackward" }];
-  }
-  if (commandFlow === "0XABC") {
-    return [{ name: "stop" }];
-  }
-  return [{ name: "moveForward" }];
+  return commandFlow.split(",").map((code) => ({ name: COMMAND[code] }));
 }
+
