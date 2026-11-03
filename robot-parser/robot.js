@@ -5,6 +5,22 @@ const COMMAND = {
 };
 
 export function parseRobotCommand(commandFlow) {
-  return commandFlow.split(",").map((code) => ({ name: COMMAND[code] }));
-}
+  const commands = [];
+  const instructions = commandFlow.split(",");
 
+  for (const instruction of instructions) {
+    const parts = instruction.split(":");
+    const code = parts[0];
+    let count = 1;
+
+    if (parts.length === 2) {
+      count = Number(parts[1]);
+    }
+
+    for (let i = 0; i < count; i++) {
+      commands.push({ name: COMMAND[code] });
+    }
+  }
+
+  return commands;
+}

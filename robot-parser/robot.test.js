@@ -31,3 +31,13 @@ test("multiple codes generate command list", function () {
   assert.equal(commands[1].name, "moveForward");
   assert.equal(commands[2].name, "stop");
 });
+
+test("commands flow is compressed", function () {
+  const commands = parseRobotCommand("0X123:3,0XABC");
+
+  assert.equal(commands.length, 4);
+  assert.equal(commands[0].name, "moveForward");
+  assert.equal(commands[1].name, "moveForward");
+  assert.equal(commands[2].name, "moveForward");
+  assert.equal(commands[3].name, "stop");
+});
