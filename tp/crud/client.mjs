@@ -1,7 +1,10 @@
 import { accountService } from "./accountService.mjs";
 
-accountService.addAccount("Zaguer", "Halima");
+const halima = accountService.addAccount("Zaguer", "Halima");
 accountService.addAccount("Ouezghari", "Assia");
 
-const accounts = accountService.getAccountList();
-console.log("Liste des comptes :", accounts);
+console.log("Liste des comptes :", accountService.getAccountList());
+
+accountService.saveAccount(halima.id, "Zaguer", "Halima-Modifiee");
+
+console.log("Liste après modification :", accountService.getAccountList());

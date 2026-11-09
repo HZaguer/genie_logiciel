@@ -7,6 +7,16 @@ export const accountService = {
     return accountDAO.insertAccount(account);
   },
   getAccountList() {return accountDAO.retrieveAccountList();},
-  saveAccount(id, lastName, firstName) {},
+  
+  saveAccount(id, lastName, firstName) {
+    const account = accountDAO.retrieveAccount(id);
+    if (account === null) {
+      console.log("Compte introuvable :", id);
+      return null;
+    }
+    account.lastName = lastName;
+    account.firstName = firstName;
+    return accountDAO.updateAccount(account);
+  },
   getAccount(id) {},
 };
