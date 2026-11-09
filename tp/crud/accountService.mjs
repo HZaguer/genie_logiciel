@@ -1,5 +1,11 @@
+import { Account } from "./account.mjs";
+import { accountDAO } from "./accountDAO.mjs";
+
 export const accountService = {
-  addAccount(lastName, firstName) {},
+  addAccount(lastName, firstName) {
+    const account = new Account(undefined, lastName, firstName);
+    return accountDAO.insertAccount(account);
+  },
   getAccountList() {},
   saveAccount(id, lastName, firstName) {},
   getAccount(id) {},
