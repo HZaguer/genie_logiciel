@@ -6,7 +6,17 @@ export const accountDAO = {
     console.log("Contenu de la BDD :", ACCOUNT_LIST);
     return account;
   },
-  retrieveAccountList() {},
+  retrieveAccountList() {
+    const result = [];
+    for (const account of ACCOUNT_LIST) {
+	result.push({
+      		id: account.id,
+      		lastName: account.lastName,
+      		firstName: account.firstName,
+    	});
+    }
+    return result
+  ;},
   updateAccount(account) {},
   retrieveAccount(id) {},
 };
