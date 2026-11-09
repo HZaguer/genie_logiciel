@@ -33,8 +33,7 @@ export const accountDAO = {
       if (account.id === id) {
         return {
           id: account.id,
-          lastName: account.lastName,
-          firstName: account.firstName,
+          name: account.lastName + " " + account.firstName,
           creationDate: account.creationDate,
         };
       }
