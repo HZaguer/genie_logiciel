@@ -14,9 +14,8 @@ export const accountService = {
       console.log("Compte introuvable :", id);
       return null;
     }
-    account.lastName = lastName;
-    account.firstName = firstName;
-    return accountDAO.updateAccount(account);
+    const updatedAccount = new Account(account.id, lastName, firstName, account.creationDate);
+    return accountDAO.updateAccount(updatedAccount);
   },
   getAccount(id) {return accountDAO.retrieveAccount(id);},
 };
