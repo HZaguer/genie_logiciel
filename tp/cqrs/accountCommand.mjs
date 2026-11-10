@@ -1,6 +1,7 @@
 import { Account } from "./account.mjs";
 import { accountCommandDAO } from "./accountCommandDAO.mjs";
 import { queryDatabase } from "./queryDatabase.mjs";
+import { accountCache } from "./cache.mjs";
 
 export const accountCommand = {
   addAccount(lastName, firstName) {
@@ -13,6 +14,12 @@ export const accountCommand = {
       firstName: account.firstName,
     });
     console.log("Contenu de la queryDatabase :", queryDatabase.accountSummaryList);
+    accountCache[account.id] = {
+      id: account.id,
+      name: account.lastName + " " + account.firstName,
+      creationDate: account.creationDate,
+    };
+    console.log("Contenu du cache :", accountCache);
 
     return account;
   },
@@ -32,7 +39,12 @@ export const accountCommand = {
       }
     }
     console.log("Contenu de la queryDatabase :", queryDatabase.accountSummaryList);
-
+    accountCache[account.id] = {
+      id: account.id,
+      name: account.lastName + " " + account.firstName,
+      creationDate: account.creationDate,
+    };
+    console.log("Contenu du cache :", accountCache);
     return account;
   },
 };
