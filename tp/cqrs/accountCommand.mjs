@@ -1,10 +1,20 @@
 import { Account } from "./account.mjs";
 import { accountCommandDAO } from "./accountCommandDAO.mjs";
+import { queryDatabase } from "./queryDatabase.mjs";
 
 export const accountCommand = {
   addAccount(lastName, firstName) {
     const account = new Account(undefined, lastName, firstName);
-    return accountCommandDAO.insertAccount(account);
+    accountCommandDAO.insertAccount(account);
+
+    queryDatabase.accountSummaryList.push({
+      id: account.id,
+      lastName: account.lastName,
+      firstName: account.firstName,
+    });
+    console.log("Contenu de la queryDatabase :", queryDatabase.accountSummaryList);
+
+    return account;
   },
   saveAccount(id, lastName, firstName) {
     const existing = accountCommandDAO.retrieveAccount(id);
@@ -13,6 +23,16 @@ export const accountCommand = {
       return null;
     }
     const account = new Account(existing.id, lastName, firstName, existing.creationDate);
-    return accountCommandDAO.updateAccount(account);
+   
+    accountCommandDAO.updateAccount(account);
+    for (const summary of queryDatabase.accountSummaryList) {
+      if (summary.id === account.id) {
+        summary.lastName = account.lastName;
+        summary.firstName = account.firstName;
+      }
+    }
+    console.log("Contenu de la queryDatabase :", queryDatabase.accountSummaryList);
+
+    return account;
   },
 };

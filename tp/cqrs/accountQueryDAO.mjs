@@ -1,16 +1,9 @@
 import { ACCOUNT_LIST } from "./database.mjs";
+import { queryDatabase } from "./queryDatabase.mjs";
 
 export const accountQueryDAO = {
   retrieveAccountList() {
-    const result = [];
-    for (const account of ACCOUNT_LIST) {
-      result.push({
-        id: account.id,
-        lastName: account.lastName,
-        firstName: account.firstName,
-      });
-    }
-    return result;
+    return queryDatabase.accountSummaryList;
   },
   retrieveAccount(id) {
     for (const account of ACCOUNT_LIST) {
